@@ -1,5 +1,5 @@
 import DefaultLayout from '@layouts/DefaultLayout'
-import allData from '@/data/pages/quotation/ongoing'
+import allData from '@/data/pages/ongoingQuotation'
 import Quotations from '@components/sections/Quotations'
 
 const OngoingQuotation = () => {

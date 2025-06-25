@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router'
 import Home from '@pages/Home'
-import Request from '@pages/quotation/Request'
-import Ongoing from '@pages/quotation/Ongoing'
+import Request from '@pages/RequestQuotation'
+import Ongoing from '@pages/OngoingQuotation'
 import Error404 from '@pages/Error'
 import routesData from '@/data/routesData'
 

@@ -1,5 +1,5 @@
 const Logo = ({ variant }) => {
-    const fillColor = variant === 'white' ? '#ffffff' : '#242A45'
+    const fillColor = variant === 'white' ? '#ffffff' : '#50ffb1'
 
     return (
         <svg

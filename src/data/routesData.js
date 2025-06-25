@@ -1,14 +1,14 @@
 const routesData = [
     {
         id: 1,
-        url: 'quotation/request',
+        url: 'request-quotation',
         text: 'Request a Quotation',
         isInMenu: true,
         orderMenu: 1,
     },
     {
         id: 2,
-        url: 'quotation/ongoing',
+        url: 'ongoing-quotation',
         text: 'Ongoging Quotations',
         isInMenu: true,
         orderMenu: 2,
