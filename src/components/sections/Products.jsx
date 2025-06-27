@@ -1,6 +1,7 @@
 import { useId, useState } from 'react'
 import ListItemProduct from '@components/patterns/ListItemProduct'
 import Toggle from '@components/base/Toggle'
+// import { useQuotationContext } from '@hooks/useQuotationContext'
 
 const Products = ({ content }) => {
     const sectionId = useId()
@@ -14,6 +15,9 @@ const Products = ({ content }) => {
     const isAnnualHandler = (newValue) => {
         setIsAnnual(newValue)
     }
+
+    // const isAnnual = useQuotationContext({ isAnnual })
+    // const isAnnualHandler = useQuotationContext({ isAnnualHandler })
 
     const calculateTotal = (checkedItems, quantities) => {
         let newTotal = 0

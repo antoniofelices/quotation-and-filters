@@ -1,15 +1,15 @@
-import { useId } from 'react'
+// import { useId } from 'react'
 import Button from '@components/base/Button'
 
 const FormQuotation = ({ content }) => {
-    const userNameId = useId()
-    const phoneId = useId()
-    const emailId = useId()
+    // const userNameId = useId()
+    // const phoneId = useId()
+    // const emailId = useId()
 
     return (
         <form action="#" className="mx-auto" id="form-newsletter">
             <div className="grid gap-4 lg:grid-cols-12 lg:justify-items-start">
-                <div className="relative w-full lg:col-span-4">
+                {/* <div className="relative w-full lg:col-span-4">
                     <label htmlFor={emailId} className="sr-only">
                         {content.labelUserName}
                     </label>
@@ -50,7 +50,7 @@ const FormQuotation = ({ content }) => {
                     <p className="message-error absolute top-[2.5rem] left-0 hidden w-full bg-red px-2 text-left text-sm text-white">
                         {content.textError}
                     </p>
-                </div>
+                </div> */}
                 <Button
                     type="submit"
                     classes={`w-full lg:col-span-2`}
