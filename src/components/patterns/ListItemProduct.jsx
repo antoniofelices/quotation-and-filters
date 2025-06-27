@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 const ListItemProduct = ({
     product,
+    isAnnual,
     isChecked,
     checkHandler,
     onQuantityChange,
@@ -19,6 +20,11 @@ const ListItemProduct = ({
         onQuantityChange(product.id, newQuantity)
     }
 
+    const calculatePrice = (price) => {
+        const result = isAnnual ? price * 12 - price * 12 * 0.2 : price
+        return result
+    }
+
     return (
         <>
             <div className="mx-8 my-4 flex items-center justify-between gap-3 rounded-lg bg-white p-10 shadow-lg shadow-gray-300/100 lg:mx-0">
@@ -28,7 +34,7 @@ const ListItemProduct = ({
                     </h2>
                     <p className="text-sm">{product.text}</p>
                 </div>
-                <p>{product.price}</p>
+                <p>{calculatePrice(product.price)}</p>
                 <label>
                     <input
                         type="checkbox"
