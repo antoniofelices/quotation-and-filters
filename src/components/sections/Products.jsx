@@ -3,12 +3,42 @@ import ListItemProduct from '@components/patterns/ListItemProduct'
 
 const Products = ({ content }) => {
     const sectionId = useId()
-    const [isChecked, setIsChecked] = useState(false)
+
+    const [checkedItems, setCheckedItems] = useState({})
+    const [quantities, setQuantities] = useState({})
     const [total, setTotal] = useState(0)
 
-    const getTotal = (e, price) => {
-        setIsChecked(e.target.checked)
-        setTotal((prevState) => prevState + (e.target.checked ? price : -price))
+    const calculateTotal = (checkedItems, quantities) => {
+        let newTotal = 0
+        let quantity = 1
+
+        content.forEach((product) => {
+            if (checkedItems[product.id]) {
+                quantity = quantities[product.id] ?? 1
+                newTotal += product.price * quantity
+            }
+        })
+
+        setTotal(newTotal)
+    }
+
+    const quantityChangeHandler = (productId, newQuantity) => {
+        const updatedQuantities = {
+            ...quantities,
+            [productId]: newQuantity,
+        }
+        setQuantities(updatedQuantities)
+        calculateTotal(checkedItems, updatedQuantities)
+    }
+
+    const checkHandler = (e, product) => {
+        const isChecked = e.target.checked
+        const updatedChecked = {
+            ...checkedItems,
+            [product.id]: isChecked,
+        }
+        setCheckedItems(updatedChecked)
+        calculateTotal(updatedChecked, quantities)
     }
 
     return (
@@ -16,9 +46,10 @@ const Products = ({ content }) => {
             {content.map((product) => (
                 <ListItemProduct
                     key={product.id}
-                    content={product}
-                    checked={isChecked}
-                    checkHandler={(e) => getTotal(e, product.price)}
+                    product={product}
+                    isChecked={checkedItems[product.id] ?? false}
+                    checkHandler={(e) => checkHandler(e, product)}
+                    onQuantityChange={quantityChangeHandler}
                 />
             ))}
             <p>Total: {total}</p>
