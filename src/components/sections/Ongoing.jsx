@@ -1,6 +1,6 @@
 import { useId } from 'react'
 
-const ListQuotations = ({ content }) => {
+const Ongoing = ({ content }) => {
     const sectionId = useId()
 
     return (
@@ -10,4 +10,4 @@ const ListQuotations = ({ content }) => {
     )
 }
 
-export default ListQuotations
+export default Ongoing

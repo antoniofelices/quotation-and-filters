@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { QuotationContext } from '@context/QuotationContext'
+import { RequestQuotationContext } from '@context/RequestQuotationContext'
 
-export const useQuotationContext = () => {
-    const context = useContext(QuotationContext)
+export const useRequestQuotationContext = () => {
+    const context = useContext(RequestQuotationContext)
     if (!context) {
         throw new Error(
             'QuotationContext have to be use inside QuotationProvider'

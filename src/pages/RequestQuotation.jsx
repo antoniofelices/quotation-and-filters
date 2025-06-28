@@ -1,19 +1,20 @@
 import DefaultLayout from '@layouts/DefaultLayout'
-import Products from '@components/sections/Products'
+import Request from '@components/sections/Request'
 import Container from '@components/base/Container'
 import FormQuotation from '@components/patterns/FormQuotation'
-import products from '@data/products'
 import allData from '@data/pages/requestQuotation'
 import formQuotation from '@data/formQuotation'
-// import { QuotationProvider } from '@context/QuotationContext'
+import { RequestQuotationProvider } from '@context/RequestQuotationContext'
 
 const RequestQuotation = () => {
     return (
         <DefaultLayout>
             <Container>
-                <h1>{allData.title}</h1>
-                <Products content={products} />
-                <FormQuotation content={formQuotation} />
+                <RequestQuotationProvider>
+                    <h1>{allData.title}</h1>
+                    <Request />
+                    <FormQuotation content={formQuotation} />
+                </RequestQuotationProvider>
             </Container>
         </DefaultLayout>
     )

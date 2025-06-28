@@ -1,23 +1,21 @@
-import { useId, useState } from 'react'
-import ListItemProduct from '@components/patterns/ListItemProduct'
-import Toggle from '@components/base/Toggle'
-import { useQuotationContext } from '@hooks/useQuotationContext'
+import { createContext, useState } from 'react'
+import products from '@data/products'
 
-const Products = ({ content }) => {
-    const sectionId = useId()
+export const RequestQuotationContext = createContext({})
+
+export const RequestQuotationProvider = ({ children }) => {
+    const [isAnnual, setIsAnnual] = useState(false)
 
     const [checkedItems, setCheckedItems] = useState({})
     const [quantities, setQuantities] = useState({})
     const [total, setTotal] = useState(0)
-
-    const { isAnnual, isAnnualHandler } = useQuotationContext()
 
     const calculateTotal = (checkedItems, quantities) => {
         let newTotal = 0
         let quantity = 1
         let price = 0
 
-        content.forEach((product) => {
+        products.forEach((product) => {
             if (checkedItems[product.id]) {
                 quantity = quantities[product.id] ?? 1
                 price = isAnnual
@@ -28,6 +26,10 @@ const Products = ({ content }) => {
         })
 
         setTotal(newTotal)
+    }
+
+    const isAnnualHandler = (newValue) => {
+        setIsAnnual(newValue)
     }
 
     const quantityChangeHandler = (productId, newQuantity) => {
@@ -49,22 +51,19 @@ const Products = ({ content }) => {
         calculateTotal(updatedChecked, quantities)
     }
 
+    const allValues = {
+        products,
+        isAnnual,
+        isAnnualHandler,
+        checkedItems,
+        total,
+        checkHandler,
+        quantityChangeHandler,
+    }
+
     return (
-        <section id={sectionId} className={`@container/header relative py-11`}>
-            <Toggle isAnnual={isAnnualHandler} />
-            {content.map((product) => (
-                <ListItemProduct
-                    key={product.id}
-                    product={product}
-                    isAnnual={isAnnual}
-                    isChecked={checkedItems[product.id] ?? false}
-                    checkHandler={(e) => checkHandler(e, product)}
-                    onQuantityChange={quantityChangeHandler}
-                />
-            ))}
-            <p>Total: {total}</p>
-        </section>
+        <RequestQuotationContext.Provider value={allValues}>
+            {children}
+        </RequestQuotationContext.Provider>
     )
 }
-
-export default Products
