@@ -4,12 +4,15 @@ import products from '@data/products'
 export const RequestQuotationContext = createContext({})
 
 export const RequestQuotationProvider = ({ children }) => {
+    const [idQuotation, setIdQuotation] = useState(1)
     const [isAnnual, setIsAnnual] = useState(false)
     const [checkedItems, setCheckedItems] = useState({})
     const [total, setTotal] = useState(0)
 
     const [numberPages, setNumberPages] = useState(1)
     const [numberLangs, setNumberLangs] = useState(1)
+
+    const [quotations, setQuotations] = useState([])
 
     const calculateTotal = (checkedItems, pages, langs) => {
         let newTotal = 0
@@ -59,6 +62,60 @@ export const RequestQuotationProvider = ({ children }) => {
         calculateTotal(updatedChecked, numberPages, numberLangs)
     }
 
+    const summaryHandler = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+
+        const clientName = formData.get('clientname')
+        const phone = formData.get('phone')
+        const email = formData.get('email')
+
+        const filterProducts = products.filter(
+            (product) => checkedItems[product.id] && product.id
+        )
+
+        const purchasedItems = filterProducts.map((product) => {
+            let result = {
+                name: `${product.title}`,
+                id: `${product.id}`,
+            }
+
+            if (product.id === 3) {
+                result = {
+                    ...result,
+                    numberOfPages: numberPages,
+                    numberOfLangs: numberLangs,
+                }
+            }
+
+            return result
+        })
+
+        const newQuotation = {
+            id: idQuotation,
+            products: purchasedItems,
+            total: total,
+            client: {
+                name: clientName,
+                phone: phone,
+                email: email,
+            },
+            date: new Date().toLocaleDateString(),
+        }
+
+        setQuotations((prevState) => {
+            const newSummary = [...prevState, newQuotation]
+            console.log(newSummary)
+            return newSummary
+        })
+
+        setIdQuotation(idQuotation + 1)
+
+        setCheckedItems({})
+        setTotal(0)
+        setIsAnnual(false)
+    }
+
     const allValues = {
         products,
         isAnnual,
@@ -70,6 +127,8 @@ export const RequestQuotationProvider = ({ children }) => {
         numberLangs,
         numberPagesHandler,
         numberLangsHandler,
+        quotations,
+        summaryHandler,
     }
 
     return (

@@ -1,19 +1,24 @@
 const ListItemQuotation = ({ content }) => {
+    const products = content.products
     return (
         <div className="mx-8 flex items-center justify-between gap-3 rounded-lg bg-white p-10 shadow-lg shadow-gray-300/100 lg:mx-0">
             <div>
-                <h2 className="text-lg font-bold text-green-900">
-                    {content.title}
-                </h2>
-                <p className="text-sm">{content.text}</p>
+                <h3>Client Data</h3>
+                <ul>
+                    <li>{content.client.name}</li>
+                    <li>{content.client.phone}</li>
+                    <li>{content.client.mail}</li>
+                </ul>
             </div>
             <div>
                 <h3>Demanded</h3>
-                <ul>Serveis</ul>
+                {products.forEach((product) => (
+                    <li>{product.li}</li>
+                ))}
             </div>
             <div>
-                <h3>Total</h3>
-                <p>Total Price</p>
+                <h3>Total Price</h3>
+                <p>{content.total}</p>
             </div>
         </div>
     )
