@@ -12,8 +12,8 @@ const ListItemQuotation = ({ content }) => {
             </div>
             <div>
                 <h3>Demanded</h3>
-                {products.forEach((product) => (
-                    <li>{product.li}</li>
+                {products.map((product) => (
+                    <li>{product.name}</li>
                 ))}
             </div>
             <div>

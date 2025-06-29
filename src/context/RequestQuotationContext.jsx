@@ -1,9 +1,12 @@
 import { createContext, useState } from 'react'
 import products from '@data/products'
+import { useQuotationContext } from '@hooks/useQuotationContext'
 
 export const RequestQuotationContext = createContext({})
 
 export const RequestQuotationProvider = ({ children }) => {
+    const { quotations, setQuotations } = useQuotationContext()
+
     const [idQuotation, setIdQuotation] = useState(1)
     const [isAnnual, setIsAnnual] = useState(false)
     const [checkedItems, setCheckedItems] = useState({})
@@ -11,8 +14,6 @@ export const RequestQuotationProvider = ({ children }) => {
 
     const [numberPages, setNumberPages] = useState(1)
     const [numberLangs, setNumberLangs] = useState(1)
-
-    const [quotations, setQuotations] = useState([])
 
     const calculateTotal = (checkedItems, pages, langs) => {
         let newTotal = 0
