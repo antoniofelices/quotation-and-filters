@@ -1,14 +1,11 @@
 import { useState } from 'react'
+import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 
-const ListItemProduct = ({
-    product,
-    isAnnual,
-    isChecked,
-    checkHandler,
-    onQuantityChange,
-}) => {
+const ListItemProduct = ({ product, isChecked, checkHandler }) => {
     const [isActive, setIsActive] = useState(false)
     const [quantity, setQuantity] = useState(1)
+
+    const { isAnnual, quantityChangeHandler } = useRequestQuotationContext()
 
     const handleOpen = () => {
         setIsActive(!isActive)
@@ -17,11 +14,11 @@ const ListItemProduct = ({
     const quantityHandler = (changer) => {
         let newQuantity = Math.max(1, quantity + changer)
         setQuantity(newQuantity)
-        onQuantityChange(product.id, newQuantity)
+        quantityChangeHandler(product.id, newQuantity)
     }
 
     const calculatePrice = (price) => {
-        const result = isAnnual ? price * 12 - price * 12 * 0.2 : price
+        const result = isAnnual ? price - price * 0.2 : price
         return result
     }
 
@@ -34,6 +31,7 @@ const ListItemProduct = ({
                     </h2>
                     <p className="text-sm">{product.text}</p>
                 </div>
+                {isAnnual === true && <p>20% discount</p>}
                 <p>{calculatePrice(product.price)}</p>
                 <label>
                     <input

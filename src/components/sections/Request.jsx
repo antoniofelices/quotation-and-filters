@@ -6,15 +6,8 @@ import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 const Request = () => {
     const sectionId = useId()
 
-    const {
-        products,
-        isAnnual,
-        isAnnualHandler,
-        checkedItems,
-        total,
-        checkHandler,
-        quantityChangeHandler,
-    } = useRequestQuotationContext()
+    const { products, isAnnualHandler, checkedItems, total, checkHandler } =
+        useRequestQuotationContext()
 
     return (
         <section id={sectionId} className={`@container/header relative py-11`}>
@@ -23,10 +16,8 @@ const Request = () => {
                 <ListItemProduct
                     key={product.id}
                     product={product}
-                    isAnnual={isAnnual}
                     isChecked={checkedItems[product.id] ?? false}
                     checkHandler={(e) => checkHandler(e, product)}
-                    onQuantityChange={quantityChangeHandler}
                 />
             ))}
             <p>Total: {total}</p>

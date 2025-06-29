@@ -5,7 +5,6 @@ export const RequestQuotationContext = createContext({})
 
 export const RequestQuotationProvider = ({ children }) => {
     const [isAnnual, setIsAnnual] = useState(false)
-
     const [checkedItems, setCheckedItems] = useState({})
     const [quantities, setQuantities] = useState({})
     const [total, setTotal] = useState(0)
@@ -53,6 +52,7 @@ export const RequestQuotationProvider = ({ children }) => {
 
     const allValues = {
         products,
+        quantities,
         isAnnual,
         isAnnualHandler,
         checkedItems,
