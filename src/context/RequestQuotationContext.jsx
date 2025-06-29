@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import products from '@data/products'
 import { useQuotationContext } from '@hooks/useQuotationContext'
 
@@ -7,7 +8,6 @@ export const RequestQuotationContext = createContext({})
 export const RequestQuotationProvider = ({ children }) => {
     const { quotations, setQuotations } = useQuotationContext()
 
-    const [idQuotation, setIdQuotation] = useState(1)
     const [isAnnual, setIsAnnual] = useState(false)
     const [checkedItems, setCheckedItems] = useState({})
     const [total, setTotal] = useState(0)
@@ -93,7 +93,7 @@ export const RequestQuotationProvider = ({ children }) => {
         })
 
         const newQuotation = {
-            id: idQuotation,
+            id: uuidv4(),
             products: purchasedItems,
             total: total,
             client: {
@@ -104,14 +104,13 @@ export const RequestQuotationProvider = ({ children }) => {
             date: new Date().toLocaleDateString(),
         }
 
-        setQuotations((prevState) => {
-            const newSummary = [...prevState, newQuotation]
-            console.log(newSummary)
-            return newSummary
-        })
+        // setQuotations((prevState) => {
+        //     const newSummary = [...prevState, newQuotation]
+        //     console.log(newSummary)
+        //     return newSummary
+        // })
 
-        setIdQuotation(idQuotation + 1)
-
+        setQuotations((prevState) => [...prevState, newQuotation])
         setCheckedItems({})
         setTotal(0)
         setIsAnnual(false)

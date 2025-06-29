@@ -13,7 +13,7 @@ const ListItemQuotation = ({ content }) => {
             <div>
                 <h3>Demanded</h3>
                 {products.map((product) => (
-                    <li>{product.name}</li>
+                    <li key={product.id}>{product.name}</li>
                 ))}
             </div>
             <div>
