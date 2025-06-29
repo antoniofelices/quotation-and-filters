@@ -6,7 +6,7 @@ import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 const Request = () => {
     const sectionId = useId()
 
-    const { products, isAnnualHandler, checkedItems, total, checkHandler } =
+    const { products, checkedItems, total, isAnnualHandler, checkHandler } =
         useRequestQuotationContext()
 
     return (

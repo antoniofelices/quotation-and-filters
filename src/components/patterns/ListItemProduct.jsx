@@ -1,21 +1,15 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 
 const ListItemProduct = ({ product, isChecked, checkHandler }) => {
-    const [isActive, setIsActive] = useState(false)
-    const [quantity, setQuantity] = useState(1)
-
-    const { isAnnual, quantityChangeHandler } = useRequestQuotationContext()
-
-    const handleOpen = () => {
-        setIsActive(!isActive)
-    }
-
-    const quantityHandler = (changer) => {
-        let newQuantity = Math.max(1, quantity + changer)
-        setQuantity(newQuantity)
-        quantityChangeHandler(product.id, newQuantity)
-    }
+    const {
+        isAnnual,
+        checkedItems,
+        numberPages,
+        numberLangs,
+        numberPagesHandler,
+        numberLangsHandler,
+    } = useRequestQuotationContext()
 
     const calculatePrice = (price) => {
         const result = isAnnual ? price - price * 0.2 : price
@@ -38,18 +32,30 @@ const ListItemProduct = ({ product, isChecked, checkHandler }) => {
                         type="checkbox"
                         checked={isChecked}
                         onChange={checkHandler}
-                        onClick={handleOpen}
                     />
                     Add
                 </label>
-                {isActive === true && (
-                    <div className="flex items-center justify-between">
-                        <button onClick={() => quantityHandler(-1)}>-</button>
-                        <p>{quantity}</p>
-                        <button onClick={() => quantityHandler(1)}>+</button>
-                    </div>
-                )}
             </div>
+            {product.id === 3 && checkedItems[product.id] && (
+                <>
+                    <p>Pages</p>
+                    <div className="flex items-center flex-start">
+                        <button onClick={() => numberPagesHandler(-1)}>
+                            -
+                        </button>
+                        <p>{numberPages}</p>
+                        <button onClick={() => numberPagesHandler(1)}>+</button>
+                    </div>
+                    <p>Langs</p>
+                    <div className="flex items-center flex-start">
+                        <button onClick={() => numberLangsHandler(-1)}>
+                            -
+                        </button>
+                        <p>{numberLangs}</p>
+                        <button onClick={() => numberLangsHandler(1)}>+</button>
+                    </div>
+                </>
+            )}
         </>
     )
 }

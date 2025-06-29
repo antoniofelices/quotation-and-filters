@@ -6,24 +6,26 @@ export const RequestQuotationContext = createContext({})
 export const RequestQuotationProvider = ({ children }) => {
     const [isAnnual, setIsAnnual] = useState(false)
     const [checkedItems, setCheckedItems] = useState({})
-    const [quantities, setQuantities] = useState({})
     const [total, setTotal] = useState(0)
 
-    const calculateTotal = (checkedItems, quantities) => {
+    const [numberPages, setNumberPages] = useState(1)
+    const [numberLangs, setNumberLangs] = useState(1)
+
+    const calculateTotal = (checkedItems, pages, langs) => {
         let newTotal = 0
-        let quantity = 1
+        let addOns = 0
         let price = 0
+        let quantityAddOns = pages + langs
 
         products.forEach((product) => {
             if (checkedItems[product.id]) {
-                quantity = quantities[product.id] ?? 1
                 price = isAnnual
                     ? product.price * 12 - product.price * 12 * 0.2
                     : product.price
-                newTotal += price * quantity
+                addOns = product.id === 3 ? quantityAddOns * 30 : 0
+                newTotal += price + addOns
             }
         })
-
         setTotal(newTotal)
     }
 
@@ -31,13 +33,16 @@ export const RequestQuotationProvider = ({ children }) => {
         setIsAnnual(newValue)
     }
 
-    const quantityChangeHandler = (productId, newQuantity) => {
-        const updatedQuantities = {
-            ...quantities,
-            [productId]: newQuantity,
-        }
-        setQuantities(updatedQuantities)
-        calculateTotal(checkedItems, updatedQuantities)
+    const numberPagesHandler = (changer) => {
+        let newQuantityPages = Math.max(1, numberPages + changer)
+        setNumberPages(newQuantityPages)
+        calculateTotal(checkedItems, newQuantityPages, numberLangs)
+    }
+
+    const numberLangsHandler = (changer) => {
+        let newQuantityLangs = Math.max(1, numberLangs + changer)
+        setNumberLangs(newQuantityLangs)
+        calculateTotal(checkedItems, numberPages, newQuantityLangs)
     }
 
     const checkHandler = (e, product) => {
@@ -47,18 +52,24 @@ export const RequestQuotationProvider = ({ children }) => {
             [product.id]: isChecked,
         }
         setCheckedItems(updatedChecked)
-        calculateTotal(updatedChecked, quantities)
+        setTotal(
+            (prevState) =>
+                prevState + (isChecked ? product.price : -product.price)
+        )
+        calculateTotal(updatedChecked, numberPages, numberLangs)
     }
 
     const allValues = {
         products,
-        quantities,
         isAnnual,
         isAnnualHandler,
         checkedItems,
         total,
         checkHandler,
-        quantityChangeHandler,
+        numberPages,
+        numberLangs,
+        numberPagesHandler,
+        numberLangsHandler,
     }
 
     return (
