@@ -1,16 +1,14 @@
 import { useId } from 'react'
-import { useQuotationContext } from '@hooks/useQuotationContext'
 import ListItemQuotation from '@components/patterns/ListItemQuotation'
 
-const Ongoing = () => {
+const Ongoing = ({ items }) => {
     const sectionId = useId()
-    const { quotations } = useQuotationContext()
 
     return (
         <section id={sectionId} className={`relative py-11`}>
-            {quotations.length > 0 ? (
+            {items.length > 0 ? (
                 <>
-                    {quotations.map((quote) => (
+                    {items.map((quote) => (
                         <ListItemQuotation key={quote.id} content={quote} />
                     ))}
                 </>

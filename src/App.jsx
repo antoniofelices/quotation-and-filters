@@ -6,6 +6,7 @@ import Error404 from '@pages/Error'
 import routesData from '@/data/routesData'
 import { QuotationProvider } from '@context/QuotationContext'
 import { RequestQuotationProvider } from '@context/RequestQuotationContext'
+import { OngoingQuotationProvider } from '@context/OngoingQuotationContext'
 
 const AllRoutes = () => {
     const [request, ongoing, error] = routesData
@@ -21,7 +22,14 @@ const AllRoutes = () => {
                         </RequestQuotationProvider>
                     }
                 />
-                <Route path={`/${ongoing.url}`} element={<Ongoing />} />
+                <Route
+                    path={`/${ongoing.url}`}
+                    element={
+                        <OngoingQuotationProvider>
+                            <Ongoing />
+                        </OngoingQuotationProvider>
+                    }
+                />
                 <Route path={`/${error.url}`} element={<Error404 />} />
             </Routes>
         </QuotationProvider>
