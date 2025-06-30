@@ -1,6 +1,6 @@
 const Filters = ({ query, onChange }) => {
     return (
-        <div>
+        <div className="flex items-center justify-between gap-3">
             <input
                 value={query}
                 onChange={onChange}
