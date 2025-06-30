@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
-
 const ListItemQuotation = ({ content }) => {
     const products = content.products
     return (
@@ -11,22 +9,20 @@ const ListItemQuotation = ({ content }) => {
                     <li>{content.client.phone}</li>
                     <li>{content.client.mail}</li>
                 </ul>
+                <p>{content.date}</p>
             </div>
             <div>
                 <h3>Demanded</h3>
                 {products.map((product) => (
-                    <>
-                        <li key={uuidv4()}>
-                            {product.name}
-                            {(product.numberOfPages ||
-                                product.numberOfLangs) && (
-                                <ul>
-                                    <li>Pages: {product.numberOfPages}</li>
-                                    <li>Langs: {product.numberOfLangs}</li>
-                                </ul>
-                            )}
-                        </li>
-                    </>
+                    <li key={product.id}>
+                        {product.name}
+                        {(product.numberOfPages || product.numberOfLangs) && (
+                            <ul>
+                                <li>Pages: {product.numberOfPages}</li>
+                                <li>Langs: {product.numberOfLangs}</li>
+                            </ul>
+                        )}
+                    </li>
                 ))}
             </div>
             <div>

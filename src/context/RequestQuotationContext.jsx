@@ -107,12 +107,12 @@ export const RequestQuotationProvider = ({ children }) => {
             date: new Date().toLocaleDateString(),
         }
 
-        // setQuotations((prevState) => {
-        //     const newSummary = [...prevState, newQuotation]
-        //     console.log(newSummary)
-        //     return newSummary
-        // })
-        setQuotations((prevState) => [...prevState, newQuotation])
+        setQuotations((prevState) => {
+            const newSummary = [...prevState, newQuotation]
+            console.log(newSummary)
+            return newSummary
+        })
+        // setQuotations((prevState) => [...prevState, newQuotation])
 
         notify()
         setCheckedItems({})
