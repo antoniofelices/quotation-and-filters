@@ -9,7 +9,7 @@ const Header = () => {
             id="header"
             className="@container/header relative container flex max-w-5xl items-center justify-between py-10"
         >
-            <div className="site-icon static z-2">
+            <div className="site-icon w-3xs">
                 <Link to="/" arial-label="link to frontpage">
                     <Logo />
                 </Link>

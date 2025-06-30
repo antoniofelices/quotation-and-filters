@@ -31,7 +31,7 @@ Sprint 6
 1. Clone this repo
 
 ```bash
-$ git clone  .
+$ git clone https://github.com/antoniofelices/quotation-and-filters .
 ```
 
 2. Install packages
@@ -49,6 +49,7 @@ $ npm run dev
 ## Future Improvements
 
 -   Add tests.
+
 -   Save local data on `localStore` and `sessionStore`
 
 ## Contributing
