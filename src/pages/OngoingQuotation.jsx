@@ -2,21 +2,21 @@ import DefaultLayout from '@layouts/DefaultLayout'
 import Container from '@components/base/Container'
 import allData from '@/data/pages/ongoingQuotation'
 import Ongoing from '@components/sections/Ongoing'
-import Filters from '@components/patterns/Filters'
-import { useQuotationContext } from '@hooks/useQuotationContext'
+import SearchFilter from '@components/patterns/SearchFilter'
+import OrderBySelect from '@components/patterns/OrderBySelect'
 import { useOngoingQuotationContext } from '@hooks/useOngoingQuotationContext'
-import { filterItems } from '@helpers/filters'
 
 const OngoingQuotation = () => {
-    const { quotations } = useQuotationContext()
-    const { query, handleQuery } = useOngoingQuotationContext()
+    const { query, handleQuery, handleSortBy, filteredAndSortedQuotations } =
+        useOngoingQuotationContext()
 
     return (
         <DefaultLayout>
             <Container>
                 <h1>{allData.title}</h1>
-                <Filters query={query} onChange={handleQuery} />
-                <Ongoing items={filterItems(quotations, query)} />
+                <SearchFilter query={query} onChange={handleQuery} />
+                <OrderBySelect handleSortBy={handleSortBy} />
+                <Ongoing items={filteredAndSortedQuotations} />
             </Container>
         </DefaultLayout>
     )
