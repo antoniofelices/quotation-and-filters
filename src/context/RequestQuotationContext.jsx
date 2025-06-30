@@ -2,6 +2,7 @@ import { createContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import products from '@data/products'
 import { useQuotationContext } from '@hooks/useQuotationContext'
+import { toast } from 'react-toastify'
 
 export const RequestQuotationContext = createContext({})
 
@@ -14,6 +15,8 @@ export const RequestQuotationProvider = ({ children }) => {
 
     const [numberPages, setNumberPages] = useState(1)
     const [numberLangs, setNumberLangs] = useState(1)
+
+    const notify = () => toast('Saved!')
 
     const calculateTotal = (checkedItems, pages, langs) => {
         let newTotal = 0
@@ -104,16 +107,18 @@ export const RequestQuotationProvider = ({ children }) => {
             date: new Date().toLocaleDateString(),
         }
 
-        setQuotations((prevState) => {
-            const newSummary = [...prevState, newQuotation]
-            console.log(newSummary)
-            return newSummary
-        })
+        // setQuotations((prevState) => {
+        //     const newSummary = [...prevState, newQuotation]
+        //     console.log(newSummary)
+        //     return newSummary
+        // })
+        setQuotations((prevState) => [...prevState, newQuotation])
 
-        // setQuotations((prevState) => [...prevState, newQuotation])
+        notify()
         setCheckedItems({})
         setTotal(0)
         setIsAnnual(false)
+        e.target.reset()
     }
 
     const allValues = {
