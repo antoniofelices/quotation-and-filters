@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from 'uuid'
+
 const ListItemQuotation = ({ content }) => {
     const products = content.products
     return (
-        <div className="mx-8 flex items-center justify-between gap-3 rounded-lg bg-white p-10 shadow-lg shadow-gray-300/100 lg:mx-0">
+        <div className="mx-8 my-4 flex items-center justify-between gap-3 rounded-lg bg-white p-10 shadow-lg shadow-gray-300/100 lg:mx-0">
             <div>
                 <h3>Client Data</h3>
                 <ul>
@@ -13,7 +15,18 @@ const ListItemQuotation = ({ content }) => {
             <div>
                 <h3>Demanded</h3>
                 {products.map((product) => (
-                    <li key={product.id}>{product.name}</li>
+                    <>
+                        <li key={uuidv4()}>
+                            {product.name}
+                            {(product.numberOfPages ||
+                                product.numberOfLangs) && (
+                                <ul>
+                                    <li>Pages: {product.numberOfPages}</li>
+                                    <li>Langs: {product.numberOfLangs}</li>
+                                </ul>
+                            )}
+                        </li>
+                    </>
                 ))}
             </div>
             <div>

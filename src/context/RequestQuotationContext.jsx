@@ -104,13 +104,13 @@ export const RequestQuotationProvider = ({ children }) => {
             date: new Date().toLocaleDateString(),
         }
 
-        // setQuotations((prevState) => {
-        //     const newSummary = [...prevState, newQuotation]
-        //     console.log(newSummary)
-        //     return newSummary
-        // })
+        setQuotations((prevState) => {
+            const newSummary = [...prevState, newQuotation]
+            console.log(newSummary)
+            return newSummary
+        })
 
-        setQuotations((prevState) => [...prevState, newQuotation])
+        // setQuotations((prevState) => [...prevState, newQuotation])
         setCheckedItems({})
         setTotal(0)
         setIsAnnual(false)
