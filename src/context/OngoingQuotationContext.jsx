@@ -17,8 +17,10 @@ export const OngoingQuotationProvider = ({ children }) => {
     }
 
     const filteredAndSortedQuotations = useMemo(() => {
+        const lowerCaseQuery = query.toLowerCase()
+
         const filtered = quotations.filter((item) =>
-            item.client.name.toLowerCase().includes(query.toLowerCase())
+            item.client.name.toLowerCase().includes(lowerCaseQuery)
         )
 
         return filtered.toSorted((a, b) => {

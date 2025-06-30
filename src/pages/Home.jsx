@@ -1,7 +1,7 @@
 import DefaultLayout from '@layouts/DefaultLayout'
 import Container from '@components/base/Container'
 import allData from '@/data/pages/home'
-import { NavLink } from 'react-router'
+import { Link } from 'react-router'
 
 const Home = () => {
     return (
@@ -11,7 +11,7 @@ const Home = () => {
                 <p>{allData.content1}</p>
                 <p>{allData.content2}</p>
                 <br />
-                <NavLink to={`/request-quotation`}>Request a quotation</NavLink>
+                <Link to={`/request-quotation`}>Request a quotation</Link>
             </Container>
         </DefaultLayout>
     )
