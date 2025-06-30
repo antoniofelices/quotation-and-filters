@@ -10,8 +10,6 @@ const SingleQuotation = () => {
 
     if (!quotation) return <h1>No content buddy</h1>
 
-    console.log(id)
-
     return (
         <DefaultLayout>
             <Container>
@@ -24,14 +22,14 @@ const SingleQuotation = () => {
                 </ul>
                 <h2>Products</h2>
                 <ul>
-                    {quotation.products.map((p) => (
+                    {quotation.products.map((product) => (
                         <>
-                            <li>Type: {p.name}</li>
-                            {p.numberOfLangs && (
-                                <li>Langs: {p.numberOfLangs}</li>
+                            <li>Type: {product.name}</li>
+                            {product.numberOfLangs && (
+                                <li>Langs: {product.numberOfLangs}</li>
                             )}
-                            {p.numberOfPages && (
-                                <li>Pages: {p.numberOfPages}</li>
+                            {product.numberOfPages && (
+                                <li>Pages: {product.numberOfPages}</li>
                             )}
                         </>
                     ))}
