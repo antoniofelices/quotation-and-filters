@@ -2,15 +2,16 @@
 
 ## Description
 
-Sprint 6
+Develop an application that can create and list quotes, as well as showing a single quote in a view. Use the React Context API and understand the data flow.
 
-<img src="src/assets/images/preview-01.webp" alt="Preview" width="200"/>
+<img src="src/assets/images/preview-01.webp" alt="Preview" width="200"/><img src="src/assets/images/preview-02.webp" alt="Preview" width="200"/><img src="src/assets/images/preview-03.webp" alt="Preview" width="200"/>
 
 ### Some decisions
 
--   Use Vite and Vitest as development tools.
+-   Use Vite as development tools.
 -   Include React Router.
 -   The data enters through the pages component.
+-   Use Context API.
 
 ## Technologies
 
@@ -49,8 +50,9 @@ $ npm run dev
 ## Future Improvements
 
 -   Add tests.
-
 -   Save local data on `localStore` and `sessionStore`
+-   Validate inputs form request quotation.
+-   Improve styles, clean some Tailwind styles.
 
 ## Contributing
 
