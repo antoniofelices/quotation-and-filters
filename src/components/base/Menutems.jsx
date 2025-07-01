@@ -5,6 +5,9 @@ const MenuItems = ({ content }) => {
         .filter((single) => single.isInMenu === true)
         .toSorted((a, b) => (a.orderMenu ?? 0) - (b.orderMenu ?? 0))
 
+    const classesLinkElement =
+        'flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group'
+
     return (
         <>
             {menuData.map((item) => (
@@ -12,10 +15,14 @@ const MenuItems = ({ content }) => {
                     <NavLink
                         to={`/${item.url}`}
                         className={({ isActive }) =>
-                            `${isActive ? 'border-b border-current pb-2' : ''}`
+                            `${classesLinkElement} ${
+                                isActive
+                                    ? 'bg-gray-200 dark:bg-gray-600 pb-2'
+                                    : ''
+                            }`
                         }
                     >
-                        {item.text}
+                        <span>{item.text}</span>
                     </NavLink>
                 </li>
             ))}

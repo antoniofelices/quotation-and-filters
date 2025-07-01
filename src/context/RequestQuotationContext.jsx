@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import products from '@data/products'
 import { useQuotationContext } from '@hooks/useQuotationContext'
 import { toast } from 'react-toastify'
+import textStrings from '@data/pages/requestQuotation'
 
 export const RequestQuotationContext = createContext({})
 
@@ -59,29 +60,23 @@ export const RequestQuotationProvider = ({ children }) => {
             [product.id]: isChecked,
         }
         setCheckedItems(updatedChecked)
-        setTotal(
-            (prevState) =>
-                prevState + (isChecked ? product.price : -product.price)
-        )
         calculateTotal(updatedChecked, numberPages, numberLangs)
     }
 
-    const summaryHandler = (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target)
+    const getClientData = (formData) => ({
+        name: formData.get('clientname'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+    })
 
-        const clientName = formData.get('clientname')
-        const phone = formData.get('phone')
-        const email = formData.get('email')
-
+    const getSelectedProducts = () => {
         const filterProducts = products.filter(
             (product) => checkedItems[product.id] && product.id
         )
-
         const purchasedItems = filterProducts.map((product) => {
             let result = {
-                name: `${product.title}`,
-                id: `${product.id}`,
+                name: product.title,
+                id: product.id,
             }
 
             if (product.id === 3) {
@@ -95,17 +90,34 @@ export const RequestQuotationProvider = ({ children }) => {
             return result
         })
 
+        return purchasedItems
+    }
+
+    const createQuotation = (client, selectedProducts) => {
         const newQuotation = {
             id: uuidv4(),
-            products: purchasedItems,
+            products: selectedProducts,
             total: total,
-            client: {
-                name: clientName,
-                phone: phone,
-                email: email,
-            },
-            date: new Date().toLocaleDateString(),
+            client: client,
+            date: new Date().toLocaleDateString('es-ES'),
         }
+
+        return newQuotation
+    }
+
+    const resetForm = (form) => {
+        setCheckedItems({})
+        setTotal(0)
+        setIsAnnual(false)
+        form.reset()
+    }
+
+    const summaryHandler = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const client = getClientData(formData)
+        const selectedProducts = getSelectedProducts()
+        const newQuotation = createQuotation(client, selectedProducts)
 
         setQuotations((prevState) => {
             const newSummary = [...prevState, newQuotation]
@@ -115,10 +127,7 @@ export const RequestQuotationProvider = ({ children }) => {
         // setQuotations((prevState) => [...prevState, newQuotation])
 
         notify()
-        setCheckedItems({})
-        setTotal(0)
-        setIsAnnual(false)
-        e.target.reset()
+        resetForm(e.target)
     }
 
     const allValues = {
@@ -134,6 +143,7 @@ export const RequestQuotationProvider = ({ children }) => {
         numberLangsHandler,
         quotations,
         summaryHandler,
+        textStrings,
     }
 
     return (

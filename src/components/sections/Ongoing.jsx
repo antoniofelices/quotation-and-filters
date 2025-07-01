@@ -1,24 +1,48 @@
-import { useId } from 'react'
 import ListItemQuotation from '@components/patterns/ListItemQuotation'
-import { Link } from 'react-router'
-import routesData from '@/data/routesData'
 
-const Ongoing = ({ items }) => {
-    const sectionId = useId()
-    const [, , quotation] = routesData
-
-    if (items.length === 0) return <h1>No content yet</h1>
+const Ongoing = ({ items, content }) => {
+    if (items.length === 0)
+        return (
+            <h1 className="text-gray-900 dark:text-white">
+                {content.noContent}
+            </h1>
+        )
 
     return (
-        <section id={sectionId} className={`relative py-11`}>
-            <>
-                {items.map((quote) => (
-                    <Link to={`/${quotation.url}/${quote.id}`} key={quote.id}>
-                        <ListItemQuotation content={quote} />
-                    </Link>
-                ))}
-            </>
-        </section>
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" className="px-6 py-3">
+                            {content.id}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.date}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.name}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.phone}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.email}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.total}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.products}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {items.map((quote) => (
+                        <ListItemQuotation content={quote} key={quote.id} />
+                    ))}
+                </tbody>
+            </table>
+        </div>
     )
 }
 

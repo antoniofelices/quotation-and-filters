@@ -1,5 +1,6 @@
 import { createContext, useMemo, useState } from 'react'
 import { useQuotationContext } from '@hooks/useQuotationContext'
+import textStrings from '@data/pages/ongoingQuotation'
 
 export const OngoingQuotationContext = createContext({})
 
@@ -44,6 +45,7 @@ export const OngoingQuotationProvider = ({ children }) => {
         sortBy,
         setSortBy,
         filteredAndSortedQuotations,
+        textStrings,
     }
 
     return (

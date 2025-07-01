@@ -1,24 +1,38 @@
-import DefaultLayout from '@layouts/DefaultLayout'
 import Container from '@components/base/Container'
-import allData from '@/data/pages/ongoingQuotation'
 import Ongoing from '@components/sections/Ongoing'
 import SearchFilter from '@components/patterns/SearchFilter'
 import OrderBySelect from '@components/patterns/OrderBySelect'
+import Hero from '@components/sections/Hero'
 import { useOngoingQuotationContext } from '@hooks/useOngoingQuotationContext'
 
 const OngoingQuotation = () => {
-    const { query, handleQuery, handleSortBy, filteredAndSortedQuotations } =
-        useOngoingQuotationContext()
+    const {
+        query,
+        handleQuery,
+        handleSortBy,
+        filteredAndSortedQuotations,
+        textStrings,
+    } = useOngoingQuotationContext()
 
     return (
-        <DefaultLayout>
-            <Container>
-                <h1>{allData.title}</h1>
-                <SearchFilter query={query} onChange={handleQuery} />
-                <OrderBySelect handleSortBy={handleSortBy} />
-                <Ongoing items={filteredAndSortedQuotations} />
-            </Container>
-        </DefaultLayout>
+        <Container>
+            <Hero title={textStrings.title} />
+            <div className="flex py-4 w-xl gap-4">
+                <SearchFilter
+                    query={query}
+                    onChange={handleQuery}
+                    label={textStrings.textSearchFilter}
+                />
+                <OrderBySelect
+                    handleSortBy={handleSortBy}
+                    content={textStrings.orderBy}
+                />
+            </div>
+            <Ongoing
+                items={filteredAndSortedQuotations}
+                content={textStrings.ongoing}
+            />
+        </Container>
     )
 }
 
