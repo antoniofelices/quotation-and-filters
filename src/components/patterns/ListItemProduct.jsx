@@ -32,17 +32,17 @@ const ListItemProduct = ({ product, isChecked, checkHandler, content }) => {
                             {calculatePrice(product.price)}.00€
                         </p>
                     </div>
-                    <div class="flex items-center">
+                    <div className="flex items-center">
                         <input
                             id={addId}
                             type="checkbox"
                             checked={isChecked}
                             onChange={checkHandler}
-                            class="w-4 h-4 text-green-700 dark:text-white  bg-gray-100 dark:bg-gray-900 border-gray-300 rounded-sm focus:ring-green-700 dark:focus:ring-green-700 dark:ring-offset-gray-800 focus:ring-2  dark:border-gray-600"
+                            className="w-4 h-4 text-green-700 dark:text-white  bg-gray-100 dark:bg-gray-900 border-gray-300 rounded-sm focus:ring-green-700 dark:focus:ring-green-700 dark:ring-offset-gray-800 focus:ring-2  dark:border-gray-600"
                         />
                         <label
                             htmlFor="default-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-white"
+                            className="ms-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
                             {content.textAdd}
                         </label>

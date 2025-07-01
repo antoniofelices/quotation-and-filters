@@ -45,7 +45,7 @@ const Header = () => {
                         <Link
                             to="/"
                             arial-label="link to frontpage"
-                            className="flex items-center justify-between mr-4"
+                            className="flex items-center justify-between mr-4 w-30"
                         >
                             <Logo />
                         </Link>
