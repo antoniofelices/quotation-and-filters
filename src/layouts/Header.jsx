@@ -71,10 +71,10 @@ const Header = () => {
                         >
                             <div className="py-3 px-4">
                                 <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-                                    Neil Sims
+                                    Lorem Ipsum
                                 </span>
                                 <span className="block text-sm text-gray-900 truncate dark:text-white">
-                                    name@flowbite.com
+                                    name@nf.com
                                 </span>
                             </div>
                             <ul

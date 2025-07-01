@@ -16,7 +16,9 @@ const MenuItems = ({ content }) => {
                         to={`/${item.url}`}
                         className={({ isActive }) =>
                             `${classesLinkElement} ${
-                                isActive ? 'border border-current pb-2' : ''
+                                isActive
+                                    ? 'bg-gray-200 dark:bg-gray-600 pb-2'
+                                    : ''
                             }`
                         }
                     >

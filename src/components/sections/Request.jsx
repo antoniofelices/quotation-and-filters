@@ -16,8 +16,8 @@ const Request = () => {
                     content={textStrings.listProduct}
                 />
             ))}
-            <p>
-                {textStrings.textTotal}: {total}
+            <p className="text-gray-900 font-bold dark:text-white py-6 text-3xl">
+                {textStrings.textTotal}: {total}.00 €
             </p>
         </>
     )

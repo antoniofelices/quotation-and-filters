@@ -16,7 +16,7 @@ const ListItemProduct = ({ product, isChecked, checkHandler, content }) => {
     }
 
     return (
-        <div className="mx-8 my-4 rounded-lg bg-white p-10 shadow-lg shadow-gray-300/100 lg:mx-0">
+        <div className="mx-8 my-4 rounded-lg bg-white p-10 shadow-lg lg:mx-0">
             <div className="flex items-center justify-between gap-3">
                 <h2 className="text-lg font-bold text-green-900">
                     {product.title}
