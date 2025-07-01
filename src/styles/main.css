@@ -23,6 +23,8 @@
     --color-gray-500: #9f9f9f;
     --color-gray-600: #3e3e3e;
     --color-gray-700: #222222;
+    --color-gray-800: #1b1b1b;
+    --color-gray-900: #111111;
 
     --font-*: initial;
     --font-sans: 'Noto Sans', ui-sans-serif, system-ui, sans-serif,
