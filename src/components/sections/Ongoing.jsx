@@ -1,25 +1,22 @@
-import { useId } from 'react'
 import ListItemQuotation from '@components/patterns/ListItemQuotation'
 
-const Ongoing = ({ items }) => {
-    const sectionId = useId()
-
-    if (items.length === 0) return <h1>No content yet</h1>
+const Ongoing = ({ items, content }) => {
+    if (items.length === 0) return <h1>{content.noContent}</h1>
 
     return (
-        <section id={sectionId} className={`relative py-11`}>
+        <>
             <table>
                 <thead>
                     <tr>
-                        <th>Quotation ID</th>
-                        <th>Quotation Date</th>
-                        <th>Client Name</th>
-                        <th>Client Phone</th>
-                        <th>Client Mail</th>
-                        <th>Quotation Total</th>
-                        <th>Product</th>
-                        <th>Number Pages (just web product)</th>
-                        <th>Number Langs (just web product)</th>
+                        <th>{content.id}</th>
+                        <th>{content.date}</th>
+                        <th>{content.name}</th>
+                        <th>{content.phone}</th>
+                        <th>{content.email}</th>
+                        <th>{content.total}</th>
+                        <th>{content.products}</th>
+                        <th>{content.numberPages}</th>
+                        <th>{content.numberLangs}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +25,7 @@ const Ongoing = ({ items }) => {
                     ))}
                 </tbody>
             </table>
-        </section>
+        </>
     )
 }
 

@@ -1,16 +1,16 @@
 import { useId } from 'react'
 
-const Hero = ({ classes, content }) => {
+const Hero = ({ classes, title }) => {
     const individualClasses = classes ? classes : ''
     const sectionId = useId()
 
     return (
-        <section
+        <div
             id={sectionId}
-            className={`@container/header relative py-11 ${individualClasses}`}
+            className={`@container/header relative py-4 ${individualClasses}`}
         >
-            <h1>{content.title}</h1>
-        </section>
+            <h1>{title}</h1>
+        </div>
     )
 }
 

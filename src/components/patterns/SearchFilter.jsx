@@ -1,12 +1,12 @@
 import { useId } from 'react'
 
-const SearchFilter = ({ query, onChange }) => {
+const SearchFilter = ({ query, onChange, label }) => {
     const labelId = useId()
 
     return (
         <>
             <label htmlFor={labelId} className="sr-only">
-                Search input
+                {label}
             </label>
             <input
                 value={query}

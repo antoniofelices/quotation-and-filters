@@ -1,27 +1,25 @@
-import { useId } from 'react'
 import ListItemProduct from '@components/patterns/ListItemProduct'
-import Toggle from '@components/base/Toggle'
 import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 
 const Request = () => {
-    const sectionId = useId()
-
-    const { products, checkedItems, total, isAnnualHandler, checkHandler } =
+    const { products, checkedItems, textStrings, total, checkHandler } =
         useRequestQuotationContext()
 
     return (
-        <section id={sectionId} className={`@container/header relative py-11`}>
-            <Toggle isAnnual={isAnnualHandler} />
+        <>
             {products.map((product) => (
                 <ListItemProduct
                     key={product.id}
                     product={product}
                     isChecked={checkedItems[product.id] ?? false}
                     checkHandler={(e) => checkHandler(e, product)}
+                    content={textStrings.listProduct}
                 />
             ))}
-            <p>Total: {total}</p>
-        </section>
+            <p>
+                {textStrings.textTotal}: {total}
+            </p>
+        </>
     )
 }
 

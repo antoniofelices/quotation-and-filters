@@ -1,6 +1,6 @@
 import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 
-const ListItemProduct = ({ product, isChecked, checkHandler }) => {
+const ListItemProduct = ({ product, isChecked, checkHandler, content }) => {
     const {
         isAnnual,
         checkedItems,
@@ -23,7 +23,7 @@ const ListItemProduct = ({ product, isChecked, checkHandler }) => {
                 </h2>
                 <p className="text-sm">{product.text}</p>
             </div>
-            {isAnnual === true && <p>20% discount</p>}
+            {isAnnual === true && <p>{content.discount}</p>}
             <p>{calculatePrice(product.price)}</p>
             <label>
                 <input
@@ -31,11 +31,11 @@ const ListItemProduct = ({ product, isChecked, checkHandler }) => {
                     checked={isChecked}
                     onChange={checkHandler}
                 />
-                Add
+                {content.textAdd}
             </label>
             {product.id === 3 && checkedItems[product.id] && (
                 <>
-                    <p>Pages</p>
+                    <p>{content.numberPages}</p>
                     <div className="flex items-center flex-start">
                         <button onClick={() => numberPagesHandler(-1)}>
                             -
@@ -43,7 +43,7 @@ const ListItemProduct = ({ product, isChecked, checkHandler }) => {
                         <p>{numberPages}</p>
                         <button onClick={() => numberPagesHandler(1)}>+</button>
                     </div>
-                    <p>Langs</p>
+                    <p>{content.numberLangs}</p>
                     <div className="flex items-center flex-start">
                         <button onClick={() => numberLangsHandler(-1)}>
                             -

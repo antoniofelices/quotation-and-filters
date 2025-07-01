@@ -2,18 +2,24 @@ import DefaultLayout from '@layouts/DefaultLayout'
 import Request from '@components/sections/Request'
 import Container from '@components/base/Container'
 import FormQuotation from '@components/patterns/FormQuotation'
-import allData from '@data/pages/requestQuotation'
-import formQuotation from '@data/formQuotation'
+import Toggle from '@components/base/Toggle'
+import Hero from '@components/sections/Hero'
 import { ToastContainer } from 'react-toastify'
+import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 
 const RequestQuotation = () => {
+    const { isAnnualHandler, textStrings } = useRequestQuotationContext()
     return (
         <DefaultLayout>
             <Container>
-                <h1>{allData.title}</h1>
+                <Hero title={textStrings.title} />
+                <Toggle
+                    isAnnual={isAnnualHandler}
+                    content={textStrings.textToggleAnnual}
+                />
                 <Request />
-                <FormQuotation content={formQuotation} />
-                <ToastContainer />
+                <FormQuotation content={textStrings.form} />
+                <ToastContainer position="bottom-right" />
             </Container>
         </DefaultLayout>
     )

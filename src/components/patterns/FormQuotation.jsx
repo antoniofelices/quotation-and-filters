@@ -6,7 +6,6 @@ const FormQuotation = ({ content }) => {
     const userNameId = useId()
     const phoneId = useId()
     const emailId = useId()
-
     const { summaryHandler } = useRequestQuotationContext()
 
     return (

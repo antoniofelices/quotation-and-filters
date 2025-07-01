@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import products from '@data/products'
 import { useQuotationContext } from '@hooks/useQuotationContext'
 import { toast } from 'react-toastify'
+import textStrings from '@data/pages/requestQuotation'
 
 export const RequestQuotationContext = createContext({})
 
@@ -142,6 +143,7 @@ export const RequestQuotationProvider = ({ children }) => {
         numberLangsHandler,
         quotations,
         summaryHandler,
+        textStrings,
     }
 
     return (

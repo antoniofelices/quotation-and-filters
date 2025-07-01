@@ -1,18 +1,18 @@
 import { useId } from 'react'
 
-const OrderBySelect = ({ handleSortBy }) => {
+const OrderBySelect = ({ handleSortBy, content }) => {
     const labelId = useId()
 
     return (
         <>
             <label htmlFor={labelId} className="sr-only">
-                Order By
+                {content.label}
             </label>
             <select onChange={handleSortBy}>
-                <option value="default">Order default</option>
-                <option value="name">Order by client's name</option>
-                <option value="date">Order by date</option>
-                <option value="total">Order by total amount</option>
+                <option value="default">{content.default}</option>
+                <option value="name">{content.name}</option>
+                <option value="date">{content.date}</option>
+                <option value="total">{content.total}</option>
             </select>
         </>
     )
