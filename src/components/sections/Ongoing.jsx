@@ -1,22 +1,39 @@
 import ListItemQuotation from '@components/patterns/ListItemQuotation'
 
 const Ongoing = ({ items, content }) => {
-    if (items.length === 0) return <h1>{content.noContent}</h1>
+    if (items.length === 0)
+        return (
+            <h1 className="text-gray-900 dark:text-white">
+                {content.noContent}
+            </h1>
+        )
 
     return (
-        <>
-            <table>
-                <thead>
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th>{content.id}</th>
-                        <th>{content.date}</th>
-                        <th>{content.name}</th>
-                        <th>{content.phone}</th>
-                        <th>{content.email}</th>
-                        <th>{content.total}</th>
-                        <th>{content.products}</th>
-                        <th>{content.numberPages}</th>
-                        <th>{content.numberLangs}</th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.id}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.date}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.name}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.phone}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.email}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.total}
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            {content.products}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +42,7 @@ const Ongoing = ({ items, content }) => {
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }
 

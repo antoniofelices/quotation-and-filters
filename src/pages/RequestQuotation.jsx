@@ -1,4 +1,3 @@
-import DefaultLayout from '@layouts/DefaultLayout'
 import Request from '@components/sections/Request'
 import Container from '@components/base/Container'
 import FormQuotation from '@components/patterns/FormQuotation'
@@ -10,18 +9,16 @@ import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 const RequestQuotation = () => {
     const { isAnnualHandler, textStrings } = useRequestQuotationContext()
     return (
-        <DefaultLayout>
-            <Container>
-                <Hero title={textStrings.title} />
-                <Toggle
-                    isAnnual={isAnnualHandler}
-                    content={textStrings.textToggleAnnual}
-                />
-                <Request />
-                <FormQuotation content={textStrings.form} />
-                <ToastContainer position="bottom-right" />
-            </Container>
-        </DefaultLayout>
+        <Container>
+            <Hero title={textStrings.title} />
+            <Toggle
+                isAnnual={isAnnualHandler}
+                content={textStrings.textToggleAnnual}
+            />
+            <Request />
+            <FormQuotation content={textStrings.form} />
+            <ToastContainer position="bottom-right" />
+        </Container>
     )
 }
 

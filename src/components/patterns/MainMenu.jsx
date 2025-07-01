@@ -4,7 +4,7 @@ import mainMenuData from '@/data/routesData'
 const MainMenu = () => {
     return (
         <>
-            <ul class="space-y-2">
+            <ul className="space-y-2">
                 <MenuItems content={mainMenuData} />
             </ul>
         </>
