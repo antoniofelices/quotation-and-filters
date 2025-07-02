@@ -1,5 +1,5 @@
 const allData = {
-    title: 'The Ongoing Quotation',
+    title: 'The Ongoing Quotation Page',
     textSearchFilter: 'Search input',
     orderBy: {
         label: 'Order By',
