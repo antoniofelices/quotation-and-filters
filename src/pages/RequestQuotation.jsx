@@ -7,12 +7,14 @@ import { ToastContainer } from 'react-toastify'
 import { useRequestQuotationContext } from '@hooks/useRequestQuotationContext'
 
 const RequestQuotation = () => {
-    const { isAnnualHandler, textStrings } = useRequestQuotationContext()
+    const { isAnnual, isAnnualHandler, textStrings } =
+        useRequestQuotationContext()
     return (
         <Container>
             <Hero title={textStrings.title} />
             <Toggle
-                isAnnual={isAnnualHandler}
+                isAnnual={isAnnual}
+                isAnnualHandler={isAnnualHandler}
                 content={textStrings.textToggleAnnual}
             />
             <Request />

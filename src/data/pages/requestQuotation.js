@@ -1,5 +1,5 @@
 const allData = {
-    title: 'The Request Quotation',
+    title: 'The Request Quotation Page',
     textToggleAnnual: 'Annual Cost',
     textTotal: 'Total',
     form: {
