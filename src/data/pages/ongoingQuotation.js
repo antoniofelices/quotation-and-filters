@@ -10,6 +10,7 @@ const allData = {
     },
     ongoing: {
         noContent: 'No content yet',
+        edit: 'Edit',
         id: 'ID',
         date: 'Date',
         name: 'Client Name',

@@ -1,9 +1,10 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import products from '@data/products'
-import { useQuotationContext } from '@hooks/useQuotationContext'
 import { toast } from 'react-toastify'
+import { useQuotationContext } from '@hooks/useQuotationContext'
+import { useCalculateTotal } from '@hooks/useCalculateTotal'
 import textStrings from '@data/pages/requestQuotation'
+import products from '@data/products'
 
 export const RequestQuotationContext = createContext({})
 
@@ -19,23 +20,17 @@ export const RequestQuotationProvider = ({ children }) => {
 
     const notify = () => toast('Saved!')
 
-    const calculateTotal = (checkedItems, pages, langs) => {
-        let newTotal = 0
-        let addOns = 0
-        let price = 0
-        let quantityAddOns = pages + langs
+    const totalCalculated = useCalculateTotal(
+        isAnnual,
+        checkedItems,
+        numberLangs,
+        numberPages,
+        products
+    )
 
-        products.forEach((product) => {
-            if (checkedItems[product.id]) {
-                price = isAnnual
-                    ? product.price * 12 - product.price * 12 * 0.2
-                    : product.price
-                addOns = product.id === 3 ? quantityAddOns * 30 : 0
-                newTotal += price + addOns
-            }
-        })
-        setTotal(newTotal)
-    }
+    useEffect(() => {
+        setTotal(totalCalculated)
+    }, [totalCalculated])
 
     const isAnnualHandler = (newValue) => {
         setIsAnnual(newValue)
@@ -44,13 +39,11 @@ export const RequestQuotationProvider = ({ children }) => {
     const numberPagesHandler = (changer) => {
         let newQuantityPages = Math.max(1, numberPages + changer)
         setNumberPages(newQuantityPages)
-        calculateTotal(checkedItems, newQuantityPages, numberLangs)
     }
 
     const numberLangsHandler = (changer) => {
         let newQuantityLangs = Math.max(1, numberLangs + changer)
         setNumberLangs(newQuantityLangs)
-        calculateTotal(checkedItems, numberPages, newQuantityLangs)
     }
 
     const checkHandler = (e, product) => {
@@ -60,7 +53,6 @@ export const RequestQuotationProvider = ({ children }) => {
             [product.id]: isChecked,
         }
         setCheckedItems(updatedChecked)
-        calculateTotal(updatedChecked, numberPages, numberLangs)
     }
 
     const getClientData = (formData) => ({
@@ -107,6 +99,8 @@ export const RequestQuotationProvider = ({ children }) => {
 
     const resetForm = (form) => {
         setCheckedItems({})
+        setNumberPages(1)
+        setNumberLangs(1)
         setTotal(0)
         setIsAnnual(false)
         form.reset()
